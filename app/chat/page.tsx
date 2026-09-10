@@ -12,7 +12,7 @@ export default function ChatPage() {
   const { address, isConnected } = useAccount();
   const { data: walletClient } = useWalletClient();
 
-  const [xmtpClient, setXmtpClient] = useState<Client | null>(null);
+  const [xmtpClient, setXmtpClient] = useState<Client<any> | null>(null);
   const [conversations, setConversations] = useState<
     { id: string; peerAddress: string }[]
   >([]);
@@ -28,10 +28,9 @@ export default function ChatPage() {
       setLoading(true);
       try {
         const signer = walletClientToXmtpSigner(walletClient);
-        const client = await Client.create(
-  signer,
-  { env: "production" } as Parameters<typeof Client.create>[1]
-);
+        const client = await Client.create(signer, {
+          env: "production",
+        } as Parameters<typeof Client.create>[1]);
         setXmtpClient(client);
 
         const convos = await client.conversations.list();
@@ -83,7 +82,9 @@ export default function ChatPage() {
   async function startNewChat() {
     if (!xmtpClient || !newPeer.trim()) return;
     try {
-      const convo = await xmtpClient.conversations.newDm(newPeer.trim());
+      const convo = await (xmtpClient.conversations as any).newDm(
+        newPeer.trim()
+      );
       setConversations((prev) => [
         ...prev,
         { id: (convo as any).id, peerAddress: newPeer.trim() },
