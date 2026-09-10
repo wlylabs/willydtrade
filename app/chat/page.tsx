@@ -112,68 +112,69 @@ export default function ChatPage() {
   const showList = !activeId;
 
   return (
-  <main className="flex flex-col">
-    <div className="h-[calc(100dvh-64px)] flex flex-col overflow-hidden">
-      <header className="px-4 py-3 border-b border-white/10 flex justify-between items-center shrink-0">
-        <h1 className="font-semibold text-base">Nexa Chain</h1>
-        <div className="flex items-center gap-3">
-          <span className="text-sm text-neutral-400 hidden sm:inline">
-            {address && shortenAddress(address)}
-          </span>
-          <button
-            onClick={() => setShowComposer((v) => !v)}
-            className="text-sm px-3 py-1.5 rounded-full bg-accent text-white font-medium"
-          >
-            New
-          </button>
-        </div>
-      </header>
+    <main className="flex flex-col">
+      <div className="h-[calc(100dvh-64px)] flex flex-col overflow-hidden">
+        <header className="px-4 py-3 border-b border-white/10 flex justify-between items-center shrink-0">
+          <h1 className="font-semibold text-base">Nexa Chain</h1>
+          <div className="flex items-center gap-3">
+            <span className="text-sm text-neutral-400 hidden sm:inline">
+              {address && shortenAddress(address)}
+            </span>
+            <button
+              onClick={() => setShowComposer((v) => !v)}
+              className="text-sm px-3 py-1.5 rounded-full bg-accent text-white font-medium"
+            >
+              New
+            </button>
+          </div>
+        </header>
 
-      {showComposer && (
-        <div className="p-3 border-b border-white/10 flex gap-2 shrink-0">
-          <input
-            value={newPeer}
-            onChange={(e) => setNewPeer(e.target.value)}
-            placeholder="Wallet address 0x..."
-            className="flex-1 bg-white/5 rounded-full px-4 py-2.5 text-sm outline-none border border-white/10"
-          />
-          <button
-            onClick={startNewChat}
-            className="px-4 py-2.5 rounded-full bg-accent text-white text-sm font-medium shrink-0"
-          >
-            Start
-          </button>
-        </div>
-      )}
-
-      <div className="flex flex-1 overflow-hidden">
-        <div className={`${showList ? "block" : "hidden"} sm:block w-full sm:w-auto h-full`}>
-          <ChatList
-            conversations={conversations}
-            onSelect={loadMessages}
-            activeId={activeId}
-          />
-        </div>
-
-        <div className={`${showList ? "hidden" : "flex"} sm:flex flex-1 min-w-0 h-full`}>
-          {activeId ? (
-            <ChatWindow
-              myAddress={address!}
-              peerAddress={
-                conversations.find((c) => c.id === activeId)?.peerAddress ?? ""
-              }
-              messages={messages}
-              onSend={handleSend}
-              onBack={() => setActiveId(null)}
+        {showComposer && (
+          <div className="p-3 border-b border-white/10 flex gap-2 shrink-0">
+            <input
+              value={newPeer}
+              onChange={(e) => setNewPeer(e.target.value)}
+              placeholder="Wallet address 0x..."
+              className="flex-1 bg-white/5 rounded-full px-4 py-2.5 text-sm outline-none border border-white/10"
             />
-          ) : (
-            <div className="flex-1 items-center justify-center text-neutral-500 text-sm hidden sm:flex">
-              {loading ? "Menyiapkan XMTP..." : "Pilih atau mulai percakapan"}
-            </div>
-          )}
+            <button
+              onClick={startNewChat}
+              className="px-4 py-2.5 rounded-full bg-accent text-white text-sm font-medium shrink-0"
+            >
+              Start
+            </button>
+          </div>
+        )}
+
+        <div className="flex flex-1 overflow-hidden">
+          <div className={`${showList ? "block" : "hidden"} sm:block w-full sm:w-auto h-full`}>
+            <ChatList
+              conversations={conversations}
+              onSelect={loadMessages}
+              activeId={activeId}
+            />
+          </div>
+
+          <div className={`${showList ? "hidden" : "flex"} sm:flex flex-1 min-w-0 h-full`}>
+            {activeId ? (
+              <ChatWindow
+                myAddress={address!}
+                peerAddress={
+                  conversations.find((c) => c.id === activeId)?.peerAddress ?? ""
+                }
+                messages={messages}
+                onSend={handleSend}
+                onBack={() => setActiveId(null)}
+              />
+            ) : (
+              <div className="flex-1 items-center justify-center text-neutral-500 text-sm hidden sm:flex">
+                {loading ? "Menyiapkan XMTP..." : "Pilih atau mulai percakapan"}
+              </div>
+            )}
+          </div>
         </div>
       </div>
-    <BottomNav />
-  </main>
-);
+      <BottomNav />
+    </main>
+  );
 }
