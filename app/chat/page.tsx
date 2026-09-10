@@ -28,7 +28,10 @@ export default function ChatPage() {
       setLoading(true);
       try {
         const signer = walletClientToXmtpSigner(walletClient);
-        const client = await Client.create(signer, { env: "production" });
+        const client = await Client.create(
+  signer,
+  { env: "production" } as Parameters<typeof Client.create>[1]
+);
         setXmtpClient(client);
 
         const convos = await client.conversations.list();
