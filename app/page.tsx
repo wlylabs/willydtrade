@@ -11,7 +11,7 @@ export default function Home() {
   const router = useRouter();
 
   useEffect(() => {
-    if (isConnected) router.push("/chat");
+    if (isConnected) router.push("/launch");
   }, [isConnected, router]);
 
   return (
