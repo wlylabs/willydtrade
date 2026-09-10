@@ -15,12 +15,12 @@ export default function Home() {
   }, [isConnected, router]);
 
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center px-6 text-center">
+    <main className="min-h-[100dvh] flex flex-col items-center justify-center px-6 text-center">
       <motion.h1
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="text-4xl md:text-6xl font-bold tracking-tight"
+        className="text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight"
       >
         Nexa Chain
       </motion.h1>
@@ -28,7 +28,7 @@ export default function Home() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.15 }}
-        className="mt-4 text-lg text-neutral-400 max-w-xl"
+        className="mt-4 text-base sm:text-lg text-neutral-400 max-w-xl"
       >
         Encrypted messaging, wallet to wallet. No phone number, no email — just your address.
       </motion.p>
