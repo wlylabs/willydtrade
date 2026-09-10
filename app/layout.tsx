@@ -1,8 +1,9 @@
 import "./globals.css";
+import Providers from "@/components/Providers";
 
 export const metadata = {
   title: "Nexa Chain",
-  description: "Web3 & crypto platform",
+  description: "Encrypted wallet-to-wallet messaging",
 };
 
 export default function RootLayout({
@@ -12,7 +13,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <Providers>{children}</Providers>
+      </body>
     </html>
   );
 }
