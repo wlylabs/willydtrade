@@ -7,6 +7,7 @@ import { walletClientToXmtpSigner } from "@/lib/xmtp";
 import ChatList from "@/components/ChatList";
 import ChatWindow from "@/components/ChatWindow";
 import { shortenAddress } from "@/lib/utils";
+import BottomNav from "@/components/BottomNav";
 
 export default function ChatPage() {
   const { address, isConnected } = useAccount();
@@ -111,7 +112,8 @@ export default function ChatPage() {
   const showList = !activeId;
 
   return (
-    <main className="h-[100dvh] flex flex-col overflow-hidden">
+  <main className="flex flex-col">
+    <div className="h-[calc(100dvh-64px)] flex flex-col overflow-hidden">
       <header className="px-4 py-3 border-b border-white/10 flex justify-between items-center shrink-0">
         <h1 className="font-semibold text-base">Nexa Chain</h1>
         <div className="flex items-center gap-3">
@@ -171,6 +173,7 @@ export default function ChatPage() {
           )}
         </div>
       </div>
-    </main>
-  );
+    <BottomNav />
+  </main>
+);
 }
